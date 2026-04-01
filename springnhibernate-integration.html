@@ -1,0 +1,1425 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Introduction to the NHibernate Framework for the .NET Platform">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/en-nhibernate-dotnet-dec-2011/springnhibernate-integration.html">
+      
+      
+        <link rel="prev" href="introduction-to-nhibernate-orm.html">
+      
+      
+        <link rel="next" href="conclusion.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>2. Spring/NHibernate Integration - Introduction to the NHibernate Framework for the .NET Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Introduction to the NHibernate Framework for the .NET Platform";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-springnhibernate-integration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Introduction to the NHibernate Framework for the .NET Platform" class="md-header__button md-logo" aria-label="Introduction to the NHibernate Framework for the .NET Platform" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to the NHibernate Framework for the .NET Platform
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Spring/NHibernate Integration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/en-nhibernate-dotnet-dec-2011" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Introduction to the NHibernate Framework for the .NET Platform" class="md-nav__button md-logo" aria-label="Introduction to the NHibernate Framework for the .NET Platform" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introduction to the NHibernate Framework for the .NET Platform
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/en-nhibernate-dotnet-dec-2011" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="introduction-to-nhibernate-orm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction to NHibernate ORM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Spring/NHibernate Integration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="springnhibernate-integration.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Spring/NHibernate Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-the-dao-data-access-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. The [DAO] data access layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. The [DAO] data access layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-the-visual-studio-c-project-for-the-dao-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1. The Visual Studio C# project for the [DAO] layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-configuring-the-c-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2. Configuring the C# project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214-spring-nhibernate-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4. Spring / NHibernate Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.4. Spring / NHibernate Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2142-the-daoxml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4.2. The [Dao.xml] file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2152-useful-methods-of-the-hibernatetemplate-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5.2. Useful methods of the HibernateTemplate class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2153-implementation-of-the-init-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5.3. Implementation of the init method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2154-implementation-of-the-getemployee-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5.4. Implementation of the GetEmployee method
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-the-console-test-program-maincs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. The console test program [Main.cs]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-generating-the-dao-layer-dll-with" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. Generating the [dao] layer DLL with
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a id="refheading796012061520258"></a></p>
+<h1 id="2-springnhibernate-integration">2. <span style="color: #365f91"><strong>Spring/NHibernate Integration</strong></span></h1>
+<p>The <strong>Spring</strong> framework provides utility classes for working with the <strong>NHibernate</strong> framework. Using these classes makes it easier to write code for accessing data from a database management system. Consider the following multi-layer architecture:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007630000015DFB927A20.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.321cm;" class="odt-zoomable" data-zoom-src="images/10000000000007630000015DFB927A20.png" /></td></tr></table>
+
+<p>In the following sections, we will build a [DAO] layer using [Spring / NHibernate] by commenting on the code of a working solution. We will not attempt to cover all possible configurations or uses of the [Spring / NHibernate] framework. Readers can adapt the proposed solution to their own needs with the help of the Spring.NET documentation [<a href="https://springframework.net/"><u><span style="color: #0563c1">Spring.NET | Homepage</span></u></a> ] (December 2011).</p>
+<p><a id="refheading1885161168461456"></a></p>
+<h2 id="21-the-dao-data-access-layer">2.1. <span style="color: #4f81bd"><strong>The [DAO] data access layer</strong></span></h2>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000075D0000015B50BD7686.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.313cm;" class="odt-zoomable" data-zoom-src="images/100000000000075D0000015B50BD7686.png" /></td></tr></table>
+
+<p>The database is the MySQL database [dbpam_nhibernate] already presented in section<a href="#bd-mysql-nhibernate"><u><span style="color: #0563c1"> 1.2</span></u></a>. The [DAO] layer implements the following C# interface:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace </span>Pam.Dao.Service {</span>
+<span class="odt-code-line">    <span style="color:#0000ff">public interface </span><span style="color:#2b91af">IPamDao </span>{</span>
+<span class="odt-code-line">        <span style="color:#008000">// list of all employee IDs </span></span>
+<span class="odt-code-line">        <span style="color:#2b91af">Employee</span>[] GetAllEmployeeIDs();</span>
+<span class="odt-code-line">        <span style="color:#008000">// a specific employee with their benefits </span></span>
+<span class="odt-code-line">        <span style="color:#2b91af">Employee </span>GetEmployee(<span style="color:#0000ff">string </span>ss);</span>
+<span class="odt-code-line">        <span style="color:#008000">// list of all contributions </span></span>
+<span class="odt-code-line">        <span style="color:#2b91af">Contributions </span>GetContributions();</span>
+<span class="odt-code-line">    }</span>
+<span class="odt-code-line">}</span>
+</code></pre></div>
+
+<p><a id="vsdaoibatis11"></a>
+<a id="refheading1885181168461456"></a></p>
+<h3 id="211-the-visual-studio-c-project-for-the-dao-layer">2.1.1. <span style="color: #4f81bd"><strong>The Visual Studio C# project for the [DAO] layer</strong></span></h3>
+<p>The Visual Studio project for the [dao] layer is as follows:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000070E000002544BB5E9A8.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.939cm;" class="odt-zoomable" data-zoom-src="images/100000000000070E000002544BB5E9A8.png" /></td></tr></table>
+
+<ul>
+  <li>in [1], the project as a whole
+    <ul>
+      <li>the [pam] folder contains the project classes as well as the NHibernate entity configuration
+      </li>
+      <li>the [App.config] and [Dao.xml] files configure the Spring/NHibernate framework. We will need to describe the contents of these two files.
+      </li>
+    </ul>
+  </li>
+  <li>in [2], the various classes of the project
+    <ul>
+      <li>in the [entities] folder, we find the NHibernate entities studied in the previous project (see page<a href="#nhibernate-demos-mapping"><u><span style="color: #0563c1"> 14</span></u></a>)
+      </li>
+      <li>In the [service] folder, we find the [IPamDao] interface and its implementation with the Spring/NHibernate framework [PamDaoSpringNHibernate].
+      </li>
+      <li>The [tests] folder contains the tests for the [IPamDao] interface.
+      </li>
+    </ul>
+  </li>
+  <li>In [3], the project references. The Spring/NHibernate integration requires new DLLs [4].
+  </li>
+</ul>
+
+<p>In the project references [3], we find the following DLLs:</p>
+<ul>
+  <li><i>NHibernate</i>: for the NHibernate ORM
+  </li>
+  <li><i>MySql.Data</i>: the ADO.NET driver for the MySQL 5 DBMS
+  </li>
+  <li><i>Spring.Core</i>: for the Spring framework, which handles layer integration
+  </li>
+  <li><i>log4net</i>: a logging library
+  </li>
+  <li><i>nunit.framework</i>: a unit testing library
+  </li>
+  <li><i>Spring.Aop, Spring.Data, </i>and <i>Spring.Data.NHibernate32</i>: provide Spring/NHibernate support.
+  </li>
+</ul>
+
+<p>We will ensure that the &quot;<em>Copy to Local</em>&quot; property for all these DLLs is set to <em>True</em>.</p>
+<p><a id="refheading1885201168461456"></a></p>
+<h3 id="212-configuring-the-c-project">2.1.2. <span style="color: #4f81bd"><strong>Configuring the C# project</strong></span></h3>
+<p>The project is configured as follows:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000031D00000148E93FB6ED.png" style="display:inline-block; margin:4px;width:10.545cm;height:4.339cm;" class="odt-zoomable" data-zoom-src="images/100000000000031D00000148E93FB6ED.png" /></td></tr></table>
+
+<ul>
+  <li>In [1], the project assembly name is [pam-dao-spring-nhibernate]. This name appears in various project configuration files.
+<a id="refheading1885221168461456"></a>
+
+### 2.1.3. <span style="color: #4f81bd">**Entities in the [dao] layer**</span>
+
+  </li>
+</ul>
+
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D6000001968213506A.png" style="display:inline-block; margin:4px;width:16.378cm;height:5.371cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D6000001968213506A.png" /></td></tr></table>
+
+<p>The entities (objects) required for the [dao] layer have been gathered in the [entities] folder [1] of the project. These entities are the same as those in the previous project (see section<a href="#nhibernate-demos-mapping"><u><span style="color: #0563c1"> 1.3.2</span></u></a>), with one difference found in the NHibernate configuration files. Take, for example, the [Employee.hbm.xml] file:</p>
+<ul>
+  <li>in [2], the file is configured to be included in the project assembly
+  </li>
+</ul>
+
+<p>Its content is as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
+<span class="odt-code-line"><span style="color:#0000ff">&lt;?</span><span style="color:#a31515">xml </span><span style="color:#0000ff">version=</span>&quot;<span style="color:#0000ff">1.0</span>&quot; <span style="color:#0000ff">encoding=</span>&quot;<span style="color:#0000ff">utf-8</span>&quot; <span style="color:#0000ff">?&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">hibernate-mapping </span><span style="color:#0000ff">xmlns=</span>&quot;<span style="color:#0000ff">urn:nhibernate-mapping-2.2</span>&quot;</span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace=</span>&quot;<span style="color:#0000ff">Pam.Dao.Entities</span>&quot; <span style="color:#0000ff">assembly=</span>&quot;<span style="color:#0000ff">pam-dao-spring-nhibernate</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">class </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Employee</span>&quot; <span style="color:#0000ff">table=</span>&quot;<span style="color:#0000ff">EMPLOYEES</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">id </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Id</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">ID</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">generator </span><span style="color:#0000ff">class=</span>&quot;<span style="color:#0000ff">native</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/id</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">version </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Version</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">VERSION</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">SS</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">SS</span>&quot; <span style="color:#0000ff">length=</span>&quot;<span style="color:#0000ff">15</span>&quot; <span style="color:#0000ff">not-null=</span>&quot;<span style="color:#0000ff">true</span>&quot; <span style="color:#0000ff">unique=</span>&quot;<span style="color:#0000ff">true</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Last Name</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">LAST_NAME</span>&quot; <span style="color:#0000ff">length=</span>&quot;<span style="color:#0000ff">30</span>&quot; <span style="color:#0000ff">not-null=</span>&quot;<span style="color:#0000ff">true</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">First Name</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">FIRST_NAME</span>&quot; <span style="color:#0000ff">length=</span>&quot;<span style="color:#0000ff">20</span>&quot; <span style="color:#0000ff">not-null=</span>&quot;<span style="color:#0000ff">true</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Address</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">ADDRESS</span>&quot; <span style="color:#0000ff">length=</span>&quot;<span style="color:#0000ff">50</span>&quot; <span style="color:#0000ff">not-null=</span>&quot;<span style="color:#0000ff">true</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">City</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">CITY</span>&quot; <span style="color:#0000ff">length=</span>&quot;<span style="color:#0000ff">30</span>&quot; <span style="color:#0000ff">not-null=</span>&quot;<span style="color:#0000ff">true</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">ZipCode</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">ZIP</span>&quot; <span style="color:#0000ff">length=</span>&quot;<span style="color:#0000ff">5</span>&quot; <span style="color:#0000ff">not-null=</span>&quot;<span style="color:#0000ff">true</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">many-to-one </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Allowances</span>&quot; <span style="color:#0000ff">column=</span>&quot;<span style="color:#0000ff">INDEMNITE_ID</span>&quot; <span style="color:#0000ff">cascade=</span>&quot;<span style="color:#0000ff">all</span>&quot; <span style="color:#0000ff">lazy=</span>&quot;<span style="color:#0000ff">false</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/class</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">/hibernate-mapping</span><span style="color:#0000ff">&gt;</span></span>
+</code></pre></div>
+
+<ul>
+  <li>line 3: the assembly attribute indicates that the file [Employe.hbm.xml] will be found in the assembly [pam-dao-spring-nhibernate]
+  </li>
+</ul>
+
+<p>Additionally, in the [entities] folder, we find an exception class used by the project:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
+<span class="odt-code-line"><span style="color:#0000ff">using </span>System;</span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace </span>Pam.Dao.Entities {</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">    <span style="color:#0000ff">public class </span><span style="color:#2b91af">PamException </span>: <span style="color:#2b91af">Exception </span>{</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// the error code </span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public int </span>Code { <span style="color:#0000ff">get</span>; <span style="color:#0000ff">set</span>; }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// constructors </span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span>PamException() {</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span>PamException(<span style="color:#0000ff">int </span>Code)</span>
+<span class="odt-code-line">            : <span style="color:#0000ff">base</span>() {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">this</span>.Code = Code;</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span>PamException(<span style="color:#0000ff">string </span>message, <span style="color:#0000ff">int </span>Code)</span>
+<span class="odt-code-line">            : <span style="color:#0000ff">base</span>(message) {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">this</span>.Code = Code;</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span>PamException(<span style="color:#0000ff">string </span>message, <span style="color:#2b91af">Exception </span>ex, <span style="color:#0000ff">int </span>Code)</span>
+<span class="odt-code-line">            : <span style="color:#0000ff">base</span>(message, ex) {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">this</span>.Code = Code;</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line">    }</span>
+<span class="odt-code-line">}</span>
+</code></pre></div>
+
+<p>The [PamException] class was derived from the [Exception] class (line 4) to add an error code (line 7).</p>
+<p><a id="refheading1885241168461456"></a></p>
+<h3 id="214-spring-nhibernate-configuration">2.1.4. <span style="color: #4f81bd"><strong>Spring / NHibernate Configuration</strong></span></h3>
+<p>Let’s return to the Visual C# project:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000002370000011E2410CBB3.png" style="display:inline-block; margin:4px;width:7.502cm;height:3.784cm;" class="odt-zoomable" data-zoom-src="images/10000000000002370000011E2410CBB3.png" /></td></tr></table>
+
+<ul>
+  <li>In [1], the [App.config] and [Dao.xml] files configure the Spring / NHibernate integration
+<a id="refheading2522201168461456"></a>
+<a id="appconfig-metier-dao-springnhibernate"></a>
+
+#### 2.1.4.1. <span style="color: #4f81bd">*The [* *App.config] file*</span>
+
+  </li>
+</ul>
+
+<p>The [App.config] file is as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
+<span class="odt-code-line"><span style="color:#0000ff">&lt;?</span><span style="color:#a31515">xml </span><span style="color:#0000ff">version=</span>&quot;<span style="color:#0000ff">1.0</span>&quot; <span style="color:#0000ff">encoding=</span>&quot;<span style="color:#0000ff">utf-8</span>&quot; <span style="color:#0000ff">?&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">configuration</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">configuration sections </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">configSections</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">sectionGroup </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">spring</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">section </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">parsers</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Spring.Context.Support.NamespaceParsersSectionHandler, Spring.Core</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">section </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">objects</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Spring.Context.Support.DefaultSectionHandler, Spring.Core</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">section </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">context</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Spring.Context.Support.ContextHandler, Spring.Core</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/sectionGroup</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">section </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">log4net</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">log4net.Config.Log4NetConfigurationSectionHandler,log4net</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/configSections</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">Spring configuration </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">spring</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">parsers</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">parser </span><span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Spring.Data.Config.DatabaseNamespaceParser, Spring.Data</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/parsers</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">context</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">resource </span><span style="color:#0000ff">uri=</span>&quot;<span style="color:#0000ff">Dao.xml</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/context</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/spring</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">This section contains the log4net configuration settings </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">IMPORTANT NOTE: Logging is not enabled by default. It must be enabled programmatically</span></span>
+<span class="odt-code-line">    using the statement log4net.Config.XmlConfigurator.Configure();</span>
+<span class="odt-code-line"><span style="color:#008000">    ! </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">log4net</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">appender </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">ConsoleAppender</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">log4net.Appender.ConsoleAppender</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">layout </span><span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">log4net.Layout.PatternLayout</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">                &lt;</span><span style="color:#a31515">conversionPattern </span><span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">%-5level %logger - %message%newline</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">/layout</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/appender</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;!-- </span><span style="color:#008000">Set default logging level to DEBUG </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">root</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">level </span><span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">DEBUG</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">appender-ref </span><span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">ConsoleAppender</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/root</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;!-- </span><span style="color:#008000">Set logging for Spring. Logger names in Spring correspond to the namespace </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">logger </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Spring</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">level </span><span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">INFO</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/logger</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">logger </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">Spring.Data</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">level </span><span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">DEBUG</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/logger</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">logger </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">NHibernate</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">level </span><span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">DEBUG</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/logger</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/log4net</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">/configuration</span><span style="color:#0000ff">&gt;</span></span>
+</code></pre></div>
+
+<p>The [App.config] file above configures Spring (lines 5–9, 15–22), log4net (line 10, lines 28–53), but not NHibernate. Spring objects are not configured in [App.config] but in the [Dao.xml] file (line 20). The Spring/NHibernate configuration, which consists of declaring specific Spring objects, will therefore be found in this file.</p>
+<p><a id="refheading2522221168461456"></a></p>
+<h4 id="2142-the-daoxml-file">2.1.4.2. <span style="color: #4f81bd"><em>The [Dao.xml] file</em></span></h4>
+<p>The [Dao.xml] file, which contains the objects managed by Spring, is as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
+<span class="odt-code-line"><span style="color:#0000ff">&lt;?</span><span style="color:#a31515">xml </span><span style="color:#0000ff">version=</span>&quot;<span style="color:#0000ff">1.0</span>&quot; <span style="color:#0000ff">encoding=</span>&quot;<span style="color:#0000ff">utf-8</span>&quot; <span style="color:#0000ff">?&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">objects </span><span style="color:#0000ff">xmlns=</span>&quot;<span style="color:#0000ff">http://www.springframework.net</span>&quot;</span>
+<span class="odt-code-line"><span style="color:#0000ff">         </span><span style="color:#ff0000">xmlns:</span><span style="color:#0000ff">db=</span>&quot;<span style="color:#0000ff">http://www.springframework.net/database</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">Referenced by the main application context configuration file </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">description</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line">        Spring / NHibernate Application</span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/description</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">Database and NHibernate Configuration </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">db:provider </span><span style="color:#0000ff">id=</span>&quot;<span style="color:#0000ff">DbProvider</span>&quot;</span>
+<span class="odt-code-line"><span style="color:#0000ff">                   provider=</span>&quot;<span style="color:#0000ff">MySql.Data.MySqlClient</span>&quot;</span>
+<span class="odt-code-line"><span style="color:#0000ff">                   connectionString=</span>&quot;<span style="color:#0000ff">Server=localhost;Database=dbpam_nhibernate;Uid=root;Pwd=;</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">object </span><span style="color:#0000ff">id=</span>&quot;<span style="color:#0000ff">NHibernateSessionFactory</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Spring.Data.NHibernate.LocalSessionFactoryObject, Spring.Data.NHibernate32</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">DbProvider</span>&quot; <span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">DbProvider</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">MappingAssemblies</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">list</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">                &lt;</span><span style="color:#a31515">value</span><span style="color:#0000ff">&gt;</span>pam-dao-spring-nhibernate<span style="color:#0000ff">&lt;</span><span style="color:#a31515">/value</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">/list</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/property</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">HibernateProperties</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">dictionary</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">                &lt;</span><span style="color:#a31515">entry </span><span style="color:#0000ff">key=</span>&quot;<span style="color:#0000ff">dialect</span>&quot; <span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">NHibernate.Dialect.MySQL5Dialect</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">                &lt;</span><span style="color:#a31515">entry </span><span style="color:#0000ff">key=</span>&quot;<span style="color:#0000ff">hibernate.show_sql</span>&quot; <span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">false</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">            &lt;</span><span style="color:#a31515">/dictionary</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">/property</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">ExposeTransactionAwareSessionFactory</span>&quot; <span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">true</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/object</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">transaction manager </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">object </span><span style="color:#0000ff">id=</span>&quot;<span style="color:#0000ff">transactionManager</span>&quot;</span>
+<span class="odt-code-line"><span style="color:#0000ff">        type=</span>&quot;<span style="color:#0000ff">Spring.Data.NHibernate.HibernateTransactionManager, Spring.Data.NHibernate32</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">DbProvider</span>&quot; <span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">DbProvider</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">SessionFactory</span>&quot; <span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">NHibernateSessionFactory</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/object</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">Hibernate Template </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">object </span><span style="color:#0000ff">id=</span>&quot;<span style="color:#0000ff">HibernateTemplate</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Spring.Data.NHibernate.Generic.HibernateTemplate</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">SessionFactory</span>&quot; <span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">NHibernateSessionFactory</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">TemplateFlushMode</span>&quot; <span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">Auto</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">CacheQueries</span>&quot; <span style="color:#0000ff">value=</span>&quot;<span style="color:#0000ff">true</span>&quot; <span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/object</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;!-- </span><span style="color:#008000">Data Access Objects </span><span style="color:#0000ff">--&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">object </span><span style="color:#0000ff">id=</span>&quot;<span style="color:#0000ff">pamdao</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Pam.Dao.Service.PamDaoSpringNHibernate, pam-dao-spring-nhibernate</span>&quot; <span style="color:#0000ff">init-method=</span>&quot;<span style="color:#0000ff">init</span>&quot; <span style="color:#0000ff">destroy-method=</span>&quot;<span style="color:#0000ff">destroy</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">HibernateTemplate</span>&quot; <span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">HibernateTemplate</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">/object</span><span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">/objects</span><span style="color:#0000ff">&gt;</span></span>
+</code></pre></div>
+
+<ul>
+  <li>Lines 11–13 configure the connection to the [dbpam_nhibernate] database. They include:
+    <ul>
+      <li>the ADO.NET provider required for the connection, in this case the MySQL DBMS provider. This requires the [Mysql.Data] DLL to be included in the project references.
+      </li>
+      <li>the database connection string (server, database name, connection owner, and password)
+      </li>
+    </ul>
+  </li>
+  <li>Lines 15–29 configure the NHibernate <i>SessionFactory</i>, the object used to obtain <i>NHibernate</i> sessions. Note that all database operations are performed within an NHibernate session. In line 15, we can see that the <i>SessionFactory </i>is implemented by the Spring class <i>Spring.Data.NHibernate.LocalSessionFactoryObject, </i>found in the <i>Spring.Data.NHibernate32 </i>DLL.
+  </li>
+  <li>Line 16: The <i>DbProvider</i> property sets the database connection parameters (ADO.NET provider and connection string). Here, this property references the <i>DbProvider</i> object defined earlier on lines 11–13.
+  </li>
+  <li>Lines 17–20: Specify the list of assemblies containing [*.hbm.xml] files that configure entities managed by NHibernate. Line 19 indicates that these files will be found in the project assembly. Note that this name is found in the C# project properties. Also note that all [*.hbm.xml] files have been configured to be included in the project assembly.
+  </li>
+  <li>Lines 22–27: NHibernate-specific properties.
+    <ul>
+      <li>Line 24: The SQL dialect used will be MySQL
+      </li>
+      <li>Line 25: The SQL generated by NHibernate will not appear in the console logs. Setting this property to <i>true </i>allows you to see the SQL statements generated by NHibernate. This can help you understand, for example, why an application is slow when accessing the database.
+      </li>
+    </ul>
+  </li>
+  <li>Line 28: Setting the <i>ExposeTransactionAwareSessionFactory</i> property to <i>true </i>will cause Spring to manage the transaction management annotations found in the C# code. We will return to this when we write the class implementing the [DAO] layer.
+  </li>
+  <li>Lines 32–36 define the transaction manager. Again, this manager is a Spring class from the <i>Spring.Data.NHibernate32 </i>DLL. This manager requires the database connection parameters (line 34) as well as the NHibernate <i>SessionFactory </i>(line 35).
+  </li>
+  <li>Lines 39–43 define the properties of the <i>HibernateTemplate</i> class, which is also a Spring class. This class will be used as a utility class in the class implementing the [DAO] layer. It facilitates interactions with NHibernate objects. This class has certain properties that must be initialized:
+    <ul>
+      <li>line 40: the NHibernate <i>SessionFactory</i>
+      </li>
+      <li>line 41: the <i>TemplateFlushMode</i> property sets the synchronization mode of the NHibernate persistence context with the database. The <i>Auto</i> mode ensures that synchronization occurs:
+        <ul>
+          <li>at the end of a transaction
+          </li>
+          <li>before a <i>SELECT</i> operation
+          </li>
+        </ul>
+      </li>
+      <li>line 42: HQL (Hibernate Query Language) queries will be cached. This can lead to a performance gain.
+      </li>
+    </ul>
+  </li>
+  <li>Lines 46–48 define the implementation class for the [dao] layer
+    <ul>
+      <li>line 46: the [dao] layer will be implemented by the [PamdaoSpringNHibernate] class in the [pam-dao-spring-nhibernate] DLL. After the class is instantiated, the class’s <i>init</i> method will be executed immediately. When the Spring container is closed, the class’s <i>destroy</i> method will be executed.
+      </li>
+      <li>Line 47: The [PamDaoSpringNHibernate] class will have a <i>HibernateTemplate</i> property that will be initialized with the <i>HibernateTemplate</i> property from line 39.
+<a id="refheading1885261168461456"></a>
+
+### 2.1.5. <span style="color: #4f81bd">**Implementation of the [dao] layer**</span>
+
+<a id="refheading2522241168461456"></a>
+
+#### 2.1.5.1. <span style="color: #4f81bd">*The skeleton of the implementation class*</span>
+
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>The [IPamDao] interface is as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace </span>Pam.Dao.Service {</span>
+<span class="odt-code-line">    <span style="color:#0000ff">public interface </span><span style="color:#2b91af">IPamDao </span>{</span>
+<span class="odt-code-line">        <span style="color:#008000">// list of all employee identities </span></span>
+<span class="odt-code-line">        <span style="color:#2b91af">Employee</span>[] GetAllEmployeeIdentities();</span>
+<span class="odt-code-line">        <span style="color:#008000">// a specific employee with their benefits </span></span>
+<span class="odt-code-line">        <span style="color:#2b91af">Employee </span>GetEmployee(<span style="color:#0000ff">string </span>ss);</span>
+<span class="odt-code-line">        <span style="color:#008000">// list of all contributions </span></span>
+<span class="odt-code-line">        <span style="color:#2b91af">Contributions </span>GetContributions();</span>
+<span class="odt-code-line">    }</span>
+<span class="odt-code-line">}</span>
+</code></pre></div>
+
+<ul>
+  <li>Line 1: We import the namespace for entities in the [dao] layer.
+  </li>
+  <li>Line 3: The [dao] layer is in the [Pam.Dao.Service] namespace. Elements in the [Pam.Dao.Entities] namespace can be created in multiple instances. Elements in the [Pam.Dao.Service] namespace are created as a single instance (singleton). This is what justified the choice of namespace names.
+  </li>
+  <li>Line 4: The interface is named [IPamDao]. It defines three methods:
+    <ul>
+      <li>Line 6: [GetAllIdentitesEmployes] returns an array of objects of type [Employe] representing the list of child care providers in a simplified format (last name, first name, SS).
+      </li>
+      <li>Line 8: [GetEmploye] returns an [Employe] object: the employee with the social security number passed as a parameter to the method, along with the benefits associated with their pay grade.
+      </li>
+      <li>Line 10, [GetCotisations] returns the [Cotisations] object, which encapsulates the rates of the various social security contributions to be deducted from the gross salary.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>The skeleton of the implementation class for this interface using Spring/NHibernate could be as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
+<span class="odt-code-line"><span style="color:#0000ff">using </span>System;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>System.Collections;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>System.Collections.Generic;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Spring.Data.NHibernate.Generic.Support;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Spring.Transaction.Interceptor;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace </span>Pam.Dao.Service {</span>
+<span class="odt-code-line">    <span style="color:#0000ff">public class </span><span style="color:#2b91af">PamDaoSpringNHibernate </span>: <span style="color:#2b91af">HibernateDaoSupport</span>, <span style="color:#2b91af">IPamDao </span>{</span>
+<span class="odt-code-line">        <span style="color:#008000">// private fields </span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">private </span><span style="color:#2b91af">Contributions </span>contributions;</span>
+<span class="odt-code-line">        <span style="color:#0000ff">private </span><span style="color:#2b91af">Employee</span>[] employees;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// init </span></span>
+<span class="odt-code-line">        [<span style="color:#2b91af">Transaction</span>(ReadOnly = <span style="color:#0000ff">true</span>)]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>init() {</span>
+<span class="odt-code-line">...</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// delete object</span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>destroy() {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">if </span>(HibernateTemplate.SessionFactory != <span style="color:#0000ff">null</span>) {</span>
+<span class="odt-code-line">                HibernateTemplate.SessionFactory.Close();</span>
+<span class="odt-code-line">            }</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// list of all employee identities</span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span><span style="color:#2b91af">Employee</span>[] GetAllEmployeeIDs() {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">return </span>employees;</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// a specific employee with their benefits </span></span>
+<span class="odt-code-line">        [<span style="color:#2b91af">Transaction</span>(ReadOnly = <span style="color:#0000ff">true</span>)]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span><span style="color:#2b91af">Employee </span>GetEmployee(<span style="color:#0000ff">string </span>ss) {</span>
+<span class="odt-code-line">....</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// list of contributions </span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span><span style="color:#2b91af">Contributions </span>GetContributions() {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">return </span>contributions;</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line">    }</span>
+<span class="odt-code-line">}</span>
+</code></pre></div>
+
+<ul>
+  <li>Line 9: The [PamDaoSpringNHibernate] class correctly implements the [dao] layer interface [IPamDao]. It also derives from the Spring class [HibernateDaoSupport]. This class has a [HibernateTemplate] property that is initialized by the Spring configuration that was set up (line 2 below):
+  </li>
+</ul>
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-text">
+<span class="odt-code-line"><span style="color:#0000ff">    &lt;</span><span style="color:#a31515">object </span><span style="color:#0000ff">id=</span>&quot;<span style="color:#0000ff">pamdao</span>&quot; <span style="color:#0000ff">type=</span>&quot;<span style="color:#0000ff">Pam.Dao.Service.PamDaoSpringNHibernate, pam-dao-spring-nhibernate</span>&quot; <span style="color:#0000ff">init-method=</span>&quot;<span style="color:#0000ff">init</span>&quot; <span style="color:#0000ff">destroy-method=</span>&quot;<span style="color:#0000ff">destroy</span>&quot;<span style="color:#0000ff">&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">        &lt;</span><span style="color:#a31515">property </span><span style="color:#0000ff">name=</span>&quot;<span style="color:#0000ff">HibernateTemplate</span>&quot; <span style="color:#0000ff">ref=</span>&quot;<span style="color:#0000ff">HibernateTemplate</span>&quot;<span style="color:#0000ff">/&gt;</span></span>
+<span class="odt-code-line"><span style="color:#0000ff">&lt;</span><span style="color:#a31515">/object</span><span style="color:#0000ff">&gt;</span></span>
+</code></pre></div>
+
+<ul>
+  <li>In line 1 above, we see that the definition of the [pamdao] object specifies that the <i>init </i>and <i>destroy </i>methods of the [PamDaoSpringNHibernate] class must be executed at specific times. These two methods are indeed present in the class on lines 16 and 21.
+  </li>
+  <li>Lines 15, 34: annotations that ensure the annotated method will be executed within a transaction. The <i>ReadOnly=true</i> attribute indicates that the transaction is read-only. The method executed within the transaction may throw an exception. In this case, Spring automatically rolls back the transaction. This annotation eliminates the need to manage a transaction within the method.
+  </li>
+  <li>Line 16: The <i>init</i> method is executed by Spring immediately after the class is instantiated. We will see that its purpose is to initialize the private fields on lines 11 and 12. It will run within a transaction (line 15).
+  </li>
+  <li>The methods of the [IPamDao] interface are implemented on lines 28, 35, and 40.
+  </li>
+  <li>Lines 28–30: The [GetAllIdentitesEmployes] method simply returns the attribute from line 12, which was initialized by the <i>init</i> method.
+  </li>
+  <li>Lines 40–42: The [GetCotisations] method simply returns the attribute from line 11, which was initialized by the <i>init</i> method.
+  </li>
+</ul>
+
+<p><a id="refheading2522261168461456"></a></p>
+<h4 id="2152-useful-methods-of-the-hibernatetemplate-class">2.1.5.2. <span style="color: #4f81bd"><em>Useful methods of the HibernateTemplate class</em></span></h4>
+<p>We will use the following methods of the <em>HibernateTemplate</em> class:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>IList&lt;T&gt; Find&lt;T&gt;(string hql_query)
+</code></pre></div>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">executes the HQL query and returns a list of objects of type T</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>IList&lt;T&gt; Find&lt;T&gt;(string hql_query, object[])
+</code></pre></div>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">executes an HQL query parameterized by ?. The values of these parameters are provided by the array of objects.</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>IList&lt;T&gt; LoadAll&lt;T&gt;()
+</code></pre></div>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">returns all entities of type <i>T</i></div></td></tr></table>
+
+<p>There are other useful methods that we won’t have the opportunity to use, which allow you to retrieve, save, update, and delete entities:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>T Load&lt;T&gt;(object id)
+</code></pre></div>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">Adds the entity of type T with the primary key <i>id</i> to the NHibernate session.</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">void</span><span class="w"> </span><span class="n">SaveOrUpdate</span><span class="p">(</span><span class="k">object</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span>
+</code></pre></div>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">Inserts (INSERT) or updates (UPDATE) the <i>entity</i> object depending on whether it has a primary key (UPDATE) or not (INSERT). The absence of a primary key can be configured using the `<i>unsaved-values` </i>attribute in the entity&#x27;s configuration file. After the <i>`SaveOrUpdate` </i>operation, the <i>entity</i> object is in the NHibernate session.</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="ow">void</span><span class="w"> </span><span class="nx">Delete</span><span class="p">(</span><span class="nx">object</span><span class="w"> </span><span class="nx">entity</span><span class="p">)</span>
+</code></pre></div>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">removes the <i>entity</i> object from the NHibernate session.</div></td></tr></table>
+
+<p><a id="refheading2522281168461456"></a></p>
+<h4 id="2153-implementation-of-the-init-method">2.1.5.3. <span style="color: #4f81bd"><em>Implementation of the init method</em></span></h4>
+<p>The <em>init</em> method of the [PamDaoSpringNHibernate] class is, by configuration, the method executed after Spring instantiates the class. Its purpose is to cache the simplified employee identities (last name, first name, SSN) and contribution rates locally. Its code could be as follows.</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-sql">
+<span class="odt-code-line">[<span style="color:#2b91af">Transaction</span>(ReadOnly = <span style="color:#0000ff">true</span>)]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>init() {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">try </span>{</span>
+<span class="odt-code-line">                <span style="color:#008000">// retrieve the simplified list of employees</span></span>
+<span class="odt-code-line">                <span style="color:#2b91af">IList</span>&lt;<span style="color:#0000ff">object</span>[]&gt; rows = HibernateTemplate.Find&lt;<span style="color:#0000ff">object</span>[]&gt;(<span style="color:#a31515">&quot;select e.SS, e.LastName, e.FirstName from Employee e&quot;</span>);</span>
+<span class="odt-code-line">                <span style="color:#008000">// put it into an array</span></span>
+<span class="odt-code-line">                employees = <span style="color:#0000ff">new </span><span style="color:#2b91af">Employee</span>[rows.Count];</span>
+<span class="odt-code-line">                <span style="color:#0000ff">int </span>i = 0;</span>
+<span class="odt-code-line">                <span style="color:#0000ff">foreach </span>(<span style="color:#0000ff">object</span>[] row <span style="color:#0000ff">in </span>rows) {</span>
+<span class="odt-code-line">                    employees[i] = <span style="color:#0000ff">new </span><span style="color:#2b91af">Employee</span>() { SS = row[0].ToString(), LastName = row[1].ToString(), FirstName = row[2].ToString() };</span>
+<span class="odt-code-line">                    i++;</span>
+<span class="odt-code-line">                }</span>
+<span class="odt-code-line">                <span style="color:#008000">// store the contribution rates in an object </span></span>
+<span class="odt-code-line">                contributions = (HibernateTemplate.LoadAll&lt;<span style="color:#2b91af">Contributions</span>&gt;())[0];</span>
+<span class="odt-code-line">            } <span style="color:#0000ff">catch </span>(<span style="color:#2b91af">Exception </span>ex) {</span>
+<span class="odt-code-line">                <span style="color:#008000">// convert the exception </span></span>
+<span class="odt-code-line">                <span style="color:#0000ff">throw new </span><span style="color:#2b91af">PamException</span>(<span style="color:#0000ff">string</span>.Format(<span style="color:#a31515">&quot;Database access error: [{0}]&quot;</span>, ex.ToString()), 43);</span>
+<span class="odt-code-line">            }</span>
+<span class="odt-code-line">        }</span>
+</code></pre></div>
+
+<ul>
+  <li>line 5: An HQL query is executed. It retrieves the SS, LastName, and FirstName fields from all <i>Employee</i> entities. It returns a list of objects. If we had requested the entire Employee record using &quot;select e from Employee e&quot;, we would have retrieved a list of objects of type <i>Employee</i>.
+  </li>
+  <li>lines 7–12: this list of objects is copied into an array of objects of type <i>Employee</i>.
+  </li>
+  <li>Line 14: We retrieve the list of all entities of type <i>Contributions</i>. We know that this list has only one element. We therefore retrieve the first element of the list to obtain the contribution rates.
+  </li>
+  <li>Lines 7 and 14 initialize the class’s two private fields.
+  </li>
+</ul>
+
+<p><a id="refheading2522301168461456"></a></p>
+<h4 id="2154-implementation-of-the-getemployee-method">2.1.5.4. <span style="color: #4f81bd"><em>Implementation of the GetEmployee method</em></span></h4>
+<p>The <em>GetEmployee</em> method must return the Employee entity with a given SSN. Its code could be as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-sql">
+<span class="odt-code-line">[<span style="color:#2b91af">Transaction</span>(ReadOnly = <span style="color:#0000ff">true</span>)]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span><span style="color:#2b91af">Employee </span>GetEmployee(<span style="color:#0000ff">string </span>ss) {</span>
+<span class="odt-code-line">            <span style="color:#2b91af">IList</span>&lt;<span style="color:#2b91af">Employee</span>&gt; employees = <span style="color:#0000ff">null</span>;</span>
+<span class="odt-code-line">            <span style="color:#0000ff">try </span>{</span>
+<span class="odt-code-line">                <span style="color:#008000">// query</span></span>
+<span class="odt-code-line">                employees = HibernateTemplate.Find&lt;<span style="color:#2b91af">Employee</span>&gt;(<span style="color:#a31515">&quot;select e from Employee e where e.SS=?&quot;</span>, <span style="color:#0000ff">new object</span>[]{ss});</span>
+<span class="odt-code-line">            } <span style="color:#0000ff">catch </span>(<span style="color:#2b91af">Exception </span>ex) {</span>
+<span class="odt-code-line">                <span style="color:#008000">// handle the exception </span></span>
+<span class="odt-code-line">                <span style="color:#0000ff">throw new </span><span style="color:#2b91af">PamException</span>(<span style="color:#0000ff">string</span>.Format(<span style="color:#a31515">&quot;Database access error while retrieving employee with ID [{0}]: [{1}]&quot;</span>, ss, ex.ToString()), 41);</span>
+<span class="odt-code-line">            }</span>
+<span class="odt-code-line">            <span style="color:#008000">// Did we retrieve an employee? </span></span>
+<span class="odt-code-line">            <span style="color:#0000ff">if </span>(employees.Count == 0) {</span>
+<span class="odt-code-line">                <span style="color:#008000">// report the issue </span></span>
+<span class="odt-code-line">                <span style="color:#0000ff">throw new </span><span style="color:#2b91af">PamException</span>(<span style="color:#0000ff">string</span>.Format(<span style="color:#a31515">&quot;Employee with SSN [{0}] does not exist&quot;</span>, ss), 42);</span>
+<span class="odt-code-line">            } <span style="color:#0000ff">else </span>{</span>
+<span class="odt-code-line">                <span style="color:#0000ff">return </span>employees[0];</span>
+<span class="odt-code-line">            }</span>
+<span class="odt-code-line">        }</span>
+</code></pre></div>
+
+<ul>
+  <li>line 6: retrieves the list of employees with a given SS number
+  </li>
+  <li>line 12: normally, if the employee exists, we should get a list with one element
+  </li>
+  <li>line 14: if not, throw an exception
+  </li>
+  <li>line 16: if so, returns the first employee in the list
+<a id="refheading1885281168461456"></a>
+
+## 2.2. <span style="color: #4f81bd">**[DAO] layer tests**</span>
+
+<a id="refheading1885301168461456"></a>
+
+### 2.2.1. <span style="color: #4f81bd">**The Visual Studio project**</span>
+
+  </li>
+</ul>
+
+<p>The Visual Studio project has already been presented. As a reminder:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007220000023BDAB3C604.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.629cm;" class="odt-zoomable" data-zoom-src="images/10000000000007220000023BDAB3C604.png" /></td></tr></table>
+
+<ul>
+  <li>in [1], the project as a whole
+  </li>
+  <li>in [2], the various classes of the project. The [tests] folder contains a console test [Main.cs] and a unit test [NUnit.cs].
+  </li>
+  <li>in [3], the program [Main.cs] is compiled.
+  </li>
+</ul>
+
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049E000001B908870843.png" style="display:inline-block; margin:4px;width:15.637cm;height:5.833cm;" class="odt-zoomable" data-zoom-src="images/100000000000049E000001B908870843.png" /></td></tr></table>
+
+<ul>
+  <li>in [4], the file [NUnit.cs] is not generated.
+  </li>
+  <li>The project is a console application. The class being executed is the one specified in [5], the class in the [Main.cs] file.
+  </li>
+</ul>
+
+<p><a id="refheading1885321168461456"></a></p>
+<h3 id="222-the-console-test-program-maincs">2.2.2. <span style="color: #4f81bd"><strong>The console test program [Main.cs]</strong></span></h3>
+<p>The test program [Main.cs] runs in the following architecture:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006C700000150295F2606.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.485cm;" class="odt-zoomable" data-zoom-src="images/10000000000006C700000150295F2606.png" /></td></tr></table>
+
+<p>It is responsible for testing the methods of the [IPamDao] interface. A basic example might be the following:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
+<span class="odt-code-line">using System;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Service;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Spring.Context.Support;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace </span>Pam.Dao.Tests {</span>
+<span class="odt-code-line">    <span style="color:#0000ff">public class </span><span style="color:#2b91af">MainPamDaoTests </span>{</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public static void </span>Main() {</span>
+<span class="odt-code-line">            <span style="color:#0000ff">try </span>{</span>
+<span class="odt-code-line">                <span style="color:#008000">// instantiate the [dao] layer</span></span>
+<span class="odt-code-line">                <span style="color:#2b91af">IPamDao </span>pamDao = (<span style="color:#2b91af">IPamDao</span>)<span style="color:#2b91af">ContextRegistry</span>.GetContext().GetObject(<span style="color:#a31515">&quot;pamdao&quot;</span>);</span>
+<span class="odt-code-line">                <span style="color:#008000">// list of employee identities </span></span>
+<span class="odt-code-line">                <span style="color:#0000ff">foreach </span>(<span style="color:#2b91af">Employee </span>Employee <span style="color:#0000ff">in </span>pamDao.GetAllEmployeeIdentities()) {</span>
+<span class="odt-code-line">                    <span style="color:#2b91af">Console</span>.WriteLine(Employee.ToString());</span>
+<span class="odt-code-line">                }</span>
+<span class="odt-code-line">                <span style="color:#008000">// an employee with their benefits </span></span>
+<span class="odt-code-line">                <span style="color:#2b91af">Console</span>.WriteLine(<span style="color:#a31515">&quot;------------------------------------&quot;</span>);</span>
+<span class="odt-code-line">                <span style="color:#2b91af">Console</span>.WriteLine(pamDao.GetEmployee(<span style="color:#a31515">&quot;254104940426058&quot;</span>));</span>
+<span class="odt-code-line">                <span style="color:#2b91af">Console</span>.WriteLine(<span style="color:#a31515">&quot;------------------------------------&quot;</span>);</span>
+<span class="odt-code-line">                <span style="color:#008000">// list of contributions </span></span>
+<span class="odt-code-line">                <span style="color:#2b91af">Dues </span>dues = pamDao.GetDues();</span>
+<span class="odt-code-line">                <span style="color:#2b91af">Console</span>.WriteLine(contributions.ToString());</span>
+<span class="odt-code-line">            } <span style="color:#0000ff">catch </span>(<span style="color:#2b91af">Exception </span>ex) {</span>
+<span class="odt-code-line">                <span style="color:#008000">// display exception </span></span>
+<span class="odt-code-line">                <span style="color:#2b91af">Console</span>.WriteLine(ex.ToString());</span>
+<span class="odt-code-line">            }</span>
+<span class="odt-code-line">            <span style="color:#008000">//pause </span></span>
+<span class="odt-code-line">            <span style="color:#2b91af">Console</span>.ReadLine();</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line">    }</span>
+<span class="odt-code-line">}</span>
+</code></pre></div>
+
+<ul>
+  <li>Line 11: We ask Spring for a reference to the [dao] layer.
+  </li>
+  <li>lines 13–15: testing the [GetAllEmployeeIDs] method of the [IPamDao] interface
+  </li>
+  <li>line 18: testing the [GetEmploye] method of the [IPamDao] interface
+  </li>
+  <li>line 21: testing the [GetCotisations] method of the [IPamDao] interface
+  </li>
+</ul>
+
+<p><em>Spring</em>, <em>NHibernate,</em> and <em>log4net</em> are configured via the [<a id="appconfig-pam-dao-nhibernate1"></a> App.config] file discussed in Section<a href="#appconfig-metier-dao-springnhibernate"><u><span style="color: #0563c1"> 2.1.4.1</span></u></a>.</p>
+<p>Running the program with the database described in section<a href="#bd-mysql-nhibernate"><u><span style="color: #0563c1"> 1.2</span></u></a> produces the following console output:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>[254104940426058,Jouveinal,Marie,,,,]
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>[260124402111742,Laverti,Justine,,,,]
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>------------------------------------
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>[254104940426058,Jouveinal,Marie,5 rue des oiseaux,St Corentin,49203,[2, 2,1, 2,1, 3,1, 15]]
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>------------------------------------
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>[3,49,6,15,9,39,7,88]
+</code></pre></div></td></tr></table></div>
+<ul>
+  <li>lines 1-2: the 2 employees of type [Employee] with only the information [SS, Last Name, First Name]
+  </li>
+  <li>line 4: the employee of type [Employee] with social security number [254104940426058]
+  </li>
+  <li>line 5: contribution rates
+<a id="refheading1885341168461456"></a>
+
+### 2.2.3. <span style="color: #4f81bd">**Unit tests with NUnit**</span>
+
+  </li>
+</ul>
+
+<p>We will now move on to a NUnit unit test. The Visual Studio project for the [dao] layer will evolve as follows:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007BD0000027A69148EF6.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.761cm;" class="odt-zoomable" data-zoom-src="images/10000000000007BD0000027A69148EF6.png" /></td></tr></table>
+
+<ul>
+  <li>in [1], the test program [NUnit.cs]
+  </li>
+  <li>in [2,3], the project will generate a DLL named [pam-dao-spring-nhibernate.dll]
+  </li>
+  <li>in [4], the reference to the NUnit framework DLL: [nunit.framework.dll]
+  </li>
+  <li>in [5], the [Main.cs] class will not be included in the [pam-dao-spring-nhibernate] DLL
+  </li>
+  <li>in [6], the [NUnit.cs] class will be included in the [pam-dao-spring-nhibernate] DLL
+  </li>
+</ul>
+
+<p>The NUnit test class is as follows:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
+<span class="odt-code-line"><span style="color:#0000ff">using </span>System.Collections;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>NUnit.Framework;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Service;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Spring.Objects.Factory.Xml;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Spring.Core.IO;</span>
+<span class="odt-code-line"><span style="color:#0000ff">using </span>Spring.Context.Support;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line"><span style="color:#0000ff">namespace </span>Pam.Dao.Tests {</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">    [TestFixture]</span>
+<span class="odt-code-line">    <span style="color:#0000ff">public class </span><span style="color:#2b91af">NunitPamDao </span>: AssertionHelper {</span>
+<span class="odt-code-line">        <span style="color:#008000">// the [DAO] layer to be tested </span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">private </span>IPamDao pamDao = <span style="color:#0000ff">null</span>;</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// constructor </span></span>
+<span class="odt-code-line">        <span style="color:#0000ff">public </span>NunitPamDao() {</span>
+<span class="odt-code-line">            <span style="color:#008000">// instantiate [DAO] layer</span></span>
+<span class="odt-code-line">            pamDao = (IPamDao)ContextRegistry.GetContext().GetObject(<span style="color:#a31515">&quot;pamdao&quot;</span>);</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        <span style="color:#008000">// initialization </span></span>
+<span class="odt-code-line">        [SetUp]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>Init() {</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        [Test]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>GetAllEmployeeIDs() {</span>
+<span class="odt-code-line">            <span style="color:#008000">// Check number of employees </span></span>
+<span class="odt-code-line">            Expect(2, EqualTo(pamDao.GetAllEmployeeIDs().Length));</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        [Test]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>GetContributions() {</span>
+<span class="odt-code-line">            <span style="color:#008000">// check contribution rates </span></span>
+<span class="odt-code-line">            Contributions contributions = pamDao.GetContributions();</span>
+<span class="odt-code-line">            Expect(3.49, EqualTo(contributions.CsgRds).Within(1E-06));</span>
+<span class="odt-code-line">            Expect(6.15, EqualTo(contributions.Csgd).Within(1E-06));</span>
+<span class="odt-code-line">            Expect(9.39, EqualTo(contributions.Secu).Within(1E-06));</span>
+<span class="odt-code-line">            Expect(7.88, EqualTo(contributions.Retirement).Within(1E-06));</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        [Test]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>GetEmployeeBenefits() {</span>
+<span class="odt-code-line">            <span style="color:#008000">// individual verification </span></span>
+<span class="odt-code-line">            Employee employee1 = pamDao.GetEmployee(<span style="color:#a31515">&quot;254104940426058&quot;</span>);</span>
+<span class="odt-code-line">            Employee employee2 = pamDao.GetEmployee(<span style="color:#a31515">&quot;260124402111742&quot;</span>);</span>
+<span class="odt-code-line">            Expect(<span style="color:#a31515">&quot;Jouveinal&quot;</span>, EqualTo(employee1.Name));</span>
+<span class="odt-code-line">            Expect(2.1, EqualTo(employee1.Compensation.BaseHour).Within(1E-06));</span>
+<span class="odt-code-line">            Expect(<span style="color:#a31515">&quot;Laverti&quot;</span>, EqualTo(employee2.Name));</span>
+<span class="odt-code-line">            Expect(1.93, EqualTo(employee2.Compensation.BaseHour).Within(1E-06));</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line"></span>
+<span class="odt-code-line">        [Test]</span>
+<span class="odt-code-line">        <span style="color:#0000ff">public void </span>GetEmployeeBenefits2() {</span>
+<span class="odt-code-line">            <span style="color:#008000">// Check for non-existent employee </span></span>
+<span class="odt-code-line">            <span style="color:#0000ff">bool </span>error = <span style="color:#0000ff">false</span>;</span>
+<span class="odt-code-line">            <span style="color:#0000ff">try </span>{</span>
+<span class="odt-code-line">                Employee employee1 = pamDao.GetEmployee(<span style="color:#a31515">&quot;xx&quot;</span>);</span>
+<span class="odt-code-line">            } <span style="color:#0000ff">catch </span>{</span>
+<span class="odt-code-line">                error = <span style="color:#0000ff">true</span>;</span>
+<span class="odt-code-line">            }</span>
+<span class="odt-code-line">            Expect(error, True);</span>
+<span class="odt-code-line">        }</span>
+<span class="odt-code-line">    }</span>
+<span class="odt-code-line">}</span>
+</code></pre></div>
+
+<ul>
+  <li>line 11: the class has the [<i>TestFixture</i>] attribute, which makes it an [NUnit] test class. 
+  </li>
+  <li>line 12: the class derives from the <i>AssertionHelper</i> utility class of the <i>NUnit</i> framework (starting with version 2.4.6).
+  </li>
+  <li>line 14: the private field [pamDao] is an instance of the interface providing access to the [dao] layer. Note that the type of this field is an <b>interface</b>, not a <b>class</b>. This means that the [pamDao] instance makes only methods accessible—specifically, those of the [IPamDao] interface.
+  </li>
+  <li>The methods tested in the class are those with the [<i>Test</i>] attribute. For all these methods, the testing process is as follows:
+    <ul>
+      <li>The method with the [<i>SetUp</i>] attribute is executed first. It is used to prepare the resources (network connections, database connections, etc.) required for the test.
+      </li>
+      <li>Then the method to be tested is executed
+      </li>
+      <li>and finally, the method with the [<i>TearDown</i>] attribute is executed. It is generally used to release the resources allocated by the method with the [<i>SetUp</i>] attribute.
+      </li>
+    </ul>
+  </li>
+  <li>In our test, there are no resources to allocate before each test and then deallocate afterward. Therefore, we do not need methods with the [<i>SetUp</i>] and [<i>TearDown</i>] attributes. For the example, we have included, on lines 23–26, a method with the [<i>SetUp</i>] attribute.
+  </li>
+  <li>Lines 17–20: The class constructor initializes the private field [pamDao] using Spring and [App.config].
+  </li>
+  <li>Lines 29–32: Test the [GetAllIdentitesEmployes] method
+  </li>
+  <li>Lines 35–42: Test the [GetCotisations] method
+  </li>
+  <li>Lines 45–53: Test the [GetEmploye] method
+  </li>
+  <li>Lines 56–65: Test the [GetEmploye] method when an exception occurs.
+  </li>
+</ul>
+
+<p>Project generation creates the DLL [pam-dao-spring-nhibernate.dll] in the [bin/Release] folder:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000027E00000260BF2EDDD4.png" style="display:inline-block; margin:4px;width:8.44cm;height:8.043cm;" class="odt-zoomable" data-zoom-src="images/100000000000027E00000260BF2EDDD4.png" /></td></tr></table>
+
+<p>We load the DLL [pam-dao-spring-nhibernate.dll] using the [NUnit-Gui] tool, version 2.5, and run the tests:</p>
+<p><img src="images/100000000000019F000000B086334CAA.png" style="width:7.74cm;height:3.283cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000019F000000B086334CAA.png" /></p>
+<p>Above, the tests were successful.</p>
+<p><a id="refheading1885361168461456"></a>
+<a id="daodll1"></a></p>
+<h3 id="224-generating-the-dao-layer-dll-with">2.2.4. <span style="color: #4f81bd"><strong>Generating the [dao] layer DLL with</strong></span></h3>
+<p>Once the [PamDaoNHibernate] class has been written and tested, we will generate the [dao] layer DLL as follows:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007910000023BC381A753.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.306cm;" class="odt-zoomable" data-zoom-src="images/10000000000007910000023BC381A753.png" /></td></tr></table>
+
+<ul>
+  <li>[1], the test programs are excluded from the project assembly
+  </li>
+  <li>[2,3], project configuration
+  </li>
+  <li>[4], project generation
+  </li>
+  <li>The DLL is generated in the [bin/Release] folder [5].
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://tahe.developpez.com" target="_blank">
+          https://tahe.developpez.com
+        </a>
+        <br>
+        This tutorial written by <strong>Serge Tahé</strong> is made available to the public under the terms of the
+<em>Creative Commons Attribution – Non-Commercial –
+ShareAlike 3.0 Unported</em>.
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
