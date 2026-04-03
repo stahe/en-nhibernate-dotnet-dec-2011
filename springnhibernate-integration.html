@@ -424,6 +424,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#213-entities-in-the-dao-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3. Entities in the [dao] layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#214-spring-nhibernate-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -436,10 +447,49 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#2141-the-appconfig-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4.1. The [ App.config] file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#2142-the-daoxml-file" class="md-nav__link">
     <span class="md-ellipsis">
       
         2.1.4.2. The [Dao.xml] file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#215-implementation-of-the-dao-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5. Implementation of the [dao] layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.5. Implementation of the [dao] layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2151-the-skeleton-of-the-implementation-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5.1. The skeleton of the implementation class
       
     </span>
   </a>
@@ -484,11 +534,50 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-dao-layer-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. [DAO] layer tests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. [DAO] layer tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-the-visual-studio-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. The Visual Studio project
+      
+    </span>
+  </a>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#222-the-console-test-program-maincs" class="md-nav__link">
     <span class="md-ellipsis">
       
         2.2.2. The console test program [Main.cs]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-unit-tests-with-nunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. Unit tests with NUnit
       
     </span>
   </a>
@@ -642,13 +731,10 @@
 
 <ul>
   <li>In [1], the project assembly name is [pam-dao-spring-nhibernate]. This name appears in various project configuration files.
-<a id="refheading1885221168461456"></a>
-
-### 2.1.3. <span style="color: #4f81bd">**Entities in the [dao] layer**</span>
-
   </li>
 </ul>
-
+<p><a id="refheading1885221168461456"></a></p>
+<h3 id="213-entities-in-the-dao-layer">2.1.3. <span style="color: #4f81bd"><strong>Entities in the [dao] layer</strong></span></h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D6000001968213506A.png" style="display:inline-block; margin:4px;width:16.378cm;height:5.371cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D6000001968213506A.png" /></td></tr></table>
 
 <p>The entities (objects) required for the [dao] layer have been gathered in the [entities] folder [1] of the project. These entities are the same as those in the previous project (see section<a href="#nhibernate-demos-mapping"><u><span style="color: #0563c1"> 1.3.2</span></u></a>), with one difference found in the NHibernate configuration files. Take, for example, the [Employee.hbm.xml] file:</p>
@@ -723,14 +809,11 @@
 
 <ul>
   <li>In [1], the [App.config] and [Dao.xml] files configure the Spring / NHibernate integration
-<a id="refheading2522201168461456"></a>
-<a id="appconfig-metier-dao-springnhibernate"></a>
-
-#### 2.1.4.1. <span style="color: #4f81bd">*The [* *App.config] file*</span>
-
   </li>
 </ul>
-
+<p><a id="refheading2522201168461456"></a>
+<a id="appconfig-metier-dao-springnhibernate"></a></p>
+<h4 id="2141-the-appconfig-file">2.1.4.1. <span style="color: #4f81bd"><em>The [</em> <em>App.config] file</em></span></h4>
 <p>The [App.config] file is as follows:</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#0000ff">&lt;?</span><span style="color:#a31515">xml </span><span style="color:#0000ff">version=</span>&quot;<span style="color:#0000ff">1.0</span>&quot; <span style="color:#0000ff">encoding=</span>&quot;<span style="color:#0000ff">utf-8</span>&quot; <span style="color:#0000ff">?&gt;</span></span>
@@ -894,19 +977,14 @@
       <li>line 46: the [dao] layer will be implemented by the [PamdaoSpringNHibernate] class in the [pam-dao-spring-nhibernate] DLL. After the class is instantiated, the class’s <i>init</i> method will be executed immediately. When the Spring container is closed, the class’s <i>destroy</i> method will be executed.
       </li>
       <li>Line 47: The [PamDaoSpringNHibernate] class will have a <i>HibernateTemplate</i> property that will be initialized with the <i>HibernateTemplate</i> property from line 39.
-<a id="refheading1885261168461456"></a>
-
-### 2.1.5. <span style="color: #4f81bd">**Implementation of the [dao] layer**</span>
-
-<a id="refheading2522241168461456"></a>
-
-#### 2.1.5.1. <span style="color: #4f81bd">*The skeleton of the implementation class*</span>
-
       </li>
     </ul>
   </li>
 </ul>
-
+<p><a id="refheading1885261168461456"></a></p>
+<h3 id="215-implementation-of-the-dao-layer">2.1.5. <span style="color: #4f81bd"><strong>Implementation of the [dao] layer</strong></span></h3>
+<p><a id="refheading2522241168461456"></a></p>
+<h4 id="2151-the-skeleton-of-the-implementation-class">2.1.5.1. <span style="color: #4f81bd"><em>The skeleton of the implementation class</em></span></h4>
 <p>The [IPamDao] interface is as follows:</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
 <span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
@@ -1108,17 +1186,12 @@
   <li>line 14: if not, throw an exception
   </li>
   <li>line 16: if so, returns the first employee in the list
-<a id="refheading1885281168461456"></a>
-
-## 2.2. <span style="color: #4f81bd">**[DAO] layer tests**</span>
-
-<a id="refheading1885301168461456"></a>
-
-### 2.2.1. <span style="color: #4f81bd">**The Visual Studio project**</span>
-
   </li>
 </ul>
-
+<p><a id="refheading1885281168461456"></a></p>
+<h2 id="22-dao-layer-tests">2.2. <span style="color: #4f81bd"><strong>[DAO] layer tests</strong></span></h2>
+<p><a id="refheading1885301168461456"></a></p>
+<h3 id="221-the-visual-studio-project">2.2.1. <span style="color: #4f81bd"><strong>The Visual Studio project</strong></span></h3>
 <p>The Visual Studio project has already been presented. As a reminder:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007220000023BDAB3C604.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.629cm;" class="odt-zoomable" data-zoom-src="images/10000000000007220000023BDAB3C604.png" /></td></tr></table>
 
@@ -1211,13 +1284,10 @@
   <li>line 4: the employee of type [Employee] with social security number [254104940426058]
   </li>
   <li>line 5: contribution rates
-<a id="refheading1885341168461456"></a>
-
-### 2.2.3. <span style="color: #4f81bd">**Unit tests with NUnit**</span>
-
   </li>
 </ul>
-
+<p><a id="refheading1885341168461456"></a></p>
+<h3 id="223-unit-tests-with-nunit">2.2.3. <span style="color: #4f81bd"><strong>Unit tests with NUnit</strong></span></h3>
 <p>We will now move on to a NUnit unit test. The Visual Studio project for the [dao] layer will evolve as follows:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007BD0000027A69148EF6.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.761cm;" class="odt-zoomable" data-zoom-src="images/10000000000007BD0000027A69148EF6.png" /></td></tr></table>
 
@@ -1356,6 +1426,8 @@
   <li>[4], project generation
   </li>
   <li>The DLL is generated in the [bin/Release] folder [5].
+  </li>
+</ul>
 
 
 
