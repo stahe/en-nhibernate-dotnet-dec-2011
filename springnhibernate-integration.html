@@ -653,13 +653,13 @@
 
 
 <p><a id="refheading796012061520258"></a></p>
-<h1 id="2-springnhibernate-integration">2. <span style="color: #365f91"><strong>Spring/NHibernate Integration</strong></span></h1>
+<h1 id="2-springnhibernate-integration">2. <span style="color: #365f91">Spring/NHibernate Integration</span></h1>
 <p>The <strong>Spring</strong> framework provides utility classes for working with the <strong>NHibernate</strong> framework. Using these classes makes it easier to write code for accessing data from a database management system. Consider the following multi-layer architecture:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007630000015DFB927A20.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.321cm;" class="odt-zoomable" data-zoom-src="images/10000000000007630000015DFB927A20.png" /></td></tr></table>
 
 <p>In the following sections, we will build a [DAO] layer using [Spring / NHibernate] by commenting on the code of a working solution. We will not attempt to cover all possible configurations or uses of the [Spring / NHibernate] framework. Readers can adapt the proposed solution to their own needs with the help of the Spring.NET documentation [<a href="https://springframework.net/"><u><span style="color: #0563c1">Spring.NET | Homepage</span></u></a> ] (December 2011).</p>
 <p><a id="refheading1885161168461456"></a></p>
-<h2 id="21-the-dao-data-access-layer">2.1. <span style="color: #4f81bd"><strong>The [DAO] data access layer</strong></span></h2>
+<h2 id="21-the-dao-data-access-layer">2.1. <span style="color: #4f81bd">The [DAO] data access layer</span></h2>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000075D0000015B50BD7686.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.313cm;" class="odt-zoomable" data-zoom-src="images/100000000000075D0000015B50BD7686.png" /></td></tr></table>
 
 <p>The database is the MySQL database [dbpam_nhibernate] already presented in section<a href="#bd-mysql-nhibernate"><u><span style="color: #0563c1"> 1.2</span></u></a>. The [DAO] layer implements the following C# interface:</p>
@@ -678,9 +678,9 @@
 <span class="odt-code-line">}</span>
 </code></pre></div>
 
-<p><a id="vsdaoibatis11"></a>
-<a id="refheading1885181168461456"></a></p>
-<h3 id="211-the-visual-studio-c-project-for-the-dao-layer">2.1.1. <span style="color: #4f81bd"><strong>The Visual Studio C# project for the [DAO] layer</strong></span></h3>
+<p><a id="refheading1885181168461456"></a>
+<a id="vsdaoibatis11"></a></p>
+<h3 id="211-the-visual-studio-c-project-for-the-dao-layer">2.1.1. <span style="color: #4f81bd">The Visual Studio C# project for the [DAO] layer</span></h3>
 <p>The Visual Studio project for the [dao] layer is as follows:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000070E000002544BB5E9A8.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.939cm;" class="odt-zoomable" data-zoom-src="images/100000000000070E000002544BB5E9A8.png" /></td></tr></table>
 
@@ -725,7 +725,7 @@
 
 <p>We will ensure that the &quot;<em>Copy to Local</em>&quot; property for all these DLLs is set to <em>True</em>.</p>
 <p><a id="refheading1885201168461456"></a></p>
-<h3 id="212-configuring-the-c-project">2.1.2. <span style="color: #4f81bd"><strong>Configuring the C# project</strong></span></h3>
+<h3 id="212-configuring-the-c-project">2.1.2. <span style="color: #4f81bd">Configuring the C# project</span></h3>
 <p>The project is configured as follows:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000031D00000148E93FB6ED.png" style="display:inline-block; margin:4px;width:10.545cm;height:4.339cm;" class="odt-zoomable" data-zoom-src="images/100000000000031D00000148E93FB6ED.png" /></td></tr></table>
 
@@ -734,7 +734,7 @@
   </li>
 </ul>
 <p><a id="refheading1885221168461456"></a></p>
-<h3 id="213-entities-in-the-dao-layer">2.1.3. <span style="color: #4f81bd"><strong>Entities in the [dao] layer</strong></span></h3>
+<h3 id="213-entities-in-the-dao-layer">2.1.3. <span style="color: #4f81bd">Entities in the [dao] layer</span></h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D6000001968213506A.png" style="display:inline-block; margin:4px;width:16.378cm;height:5.371cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D6000001968213506A.png" /></td></tr></table>
 
 <p>The entities (objects) required for the [dao] layer have been gathered in the [entities] folder [1] of the project. These entities are the same as those in the previous project (see section<a href="#nhibernate-demos-mapping"><u><span style="color: #0563c1"> 1.3.2</span></u></a>), with one difference found in the NHibernate configuration files. Take, for example, the [Employee.hbm.xml] file:</p>
@@ -803,7 +803,7 @@
 
 <p>The [PamException] class was derived from the [Exception] class (line 4) to add an error code (line 7).</p>
 <p><a id="refheading1885241168461456"></a></p>
-<h3 id="214-spring-nhibernate-configuration">2.1.4. <span style="color: #4f81bd"><strong>Spring / NHibernate Configuration</strong></span></h3>
+<h3 id="214-spring-nhibernate-configuration">2.1.4. <span style="color: #4f81bd">Spring / NHibernate Configuration</span></h3>
 <p>Let’s return to the Visual C# project:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000002370000011E2410CBB3.png" style="display:inline-block; margin:4px;width:7.502cm;height:3.784cm;" class="odt-zoomable" data-zoom-src="images/10000000000002370000011E2410CBB3.png" /></td></tr></table>
 
@@ -875,7 +875,7 @@
 
 <p>The [App.config] file above configures Spring (lines 5–9, 15–22), log4net (line 10, lines 28–53), but not NHibernate. Spring objects are not configured in [App.config] but in the [Dao.xml] file (line 20). The Spring/NHibernate configuration, which consists of declaring specific Spring objects, will therefore be found in this file.</p>
 <p><a id="refheading2522221168461456"></a></p>
-<h4 id="2142-the-daoxml-file">2.1.4.2. <span style="color: #4f81bd"><em>The [Dao.xml] file</em></span></h4>
+<h4 id="2142-the-daoxml-file">2.1.4.2. <span style="color: #4f81bd">The [Dao.xml] file</span></h4>
 <p>The [Dao.xml] file, which contains the objects managed by Spring, is as follows:</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#0000ff">&lt;?</span><span style="color:#a31515">xml </span><span style="color:#0000ff">version=</span>&quot;<span style="color:#0000ff">1.0</span>&quot; <span style="color:#0000ff">encoding=</span>&quot;<span style="color:#0000ff">utf-8</span>&quot; <span style="color:#0000ff">?&gt;</span></span>
@@ -982,9 +982,9 @@
   </li>
 </ul>
 <p><a id="refheading1885261168461456"></a></p>
-<h3 id="215-implementation-of-the-dao-layer">2.1.5. <span style="color: #4f81bd"><strong>Implementation of the [dao] layer</strong></span></h3>
+<h3 id="215-implementation-of-the-dao-layer">2.1.5. <span style="color: #4f81bd">Implementation of the [dao] layer</span></h3>
 <p><a id="refheading2522241168461456"></a></p>
-<h4 id="2151-the-skeleton-of-the-implementation-class">2.1.5.1. <span style="color: #4f81bd"><em>The skeleton of the implementation class</em></span></h4>
+<h4 id="2151-the-skeleton-of-the-implementation-class">2.1.5.1. <span style="color: #4f81bd">The skeleton of the implementation class</span></h4>
 <p>The [IPamDao] interface is as follows:</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-csharp">
 <span class="odt-code-line"><span style="color:#0000ff">using </span>Pam.Dao.Entities;</span>
@@ -1093,7 +1093,7 @@
 </ul>
 
 <p><a id="refheading2522261168461456"></a></p>
-<h4 id="2152-useful-methods-of-the-hibernatetemplate-class">2.1.5.2. <span style="color: #4f81bd"><em>Useful methods of the HibernateTemplate class</em></span></h4>
+<h4 id="2152-useful-methods-of-the-hibernatetemplate-class">2.1.5.2. <span style="color: #4f81bd">Useful methods of the HibernateTemplate class</span></h4>
 <p>We will use the following methods of the <em>HibernateTemplate</em> class:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>IList&lt;T&gt; Find&lt;T&gt;(string hql_query)
@@ -1119,7 +1119,7 @@
 </div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">removes the <i>entity</i> object from the NHibernate session.</div></td></tr></table>
 
 <p><a id="refheading2522281168461456"></a></p>
-<h4 id="2153-implementation-of-the-init-method">2.1.5.3. <span style="color: #4f81bd"><em>Implementation of the init method</em></span></h4>
+<h4 id="2153-implementation-of-the-init-method">2.1.5.3. <span style="color: #4f81bd">Implementation of the init method</span></h4>
 <p>The <em>init</em> method of the [PamDaoSpringNHibernate] class is, by configuration, the method executed after Spring instantiates the class. Its purpose is to cache the simplified employee identities (last name, first name, SSN) and contribution rates locally. Its code could be as follows.</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-sql">
 <span class="odt-code-line">[<span style="color:#2b91af">Transaction</span>(ReadOnly = <span style="color:#0000ff">true</span>)]</span>
@@ -1155,7 +1155,7 @@
 </ul>
 
 <p><a id="refheading2522301168461456"></a></p>
-<h4 id="2154-implementation-of-the-getemployee-method">2.1.5.4. <span style="color: #4f81bd"><em>Implementation of the GetEmployee method</em></span></h4>
+<h4 id="2154-implementation-of-the-getemployee-method">2.1.5.4. <span style="color: #4f81bd">Implementation of the GetEmployee method</span></h4>
 <p>The <em>GetEmployee</em> method must return the Employee entity with a given SSN. Its code could be as follows:</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-sql">
 <span class="odt-code-line">[<span style="color:#2b91af">Transaction</span>(ReadOnly = <span style="color:#0000ff">true</span>)]</span>
@@ -1189,9 +1189,9 @@
   </li>
 </ul>
 <p><a id="refheading1885281168461456"></a></p>
-<h2 id="22-dao-layer-tests">2.2. <span style="color: #4f81bd"><strong>[DAO] layer tests</strong></span></h2>
+<h2 id="22-dao-layer-tests">2.2. <span style="color: #4f81bd">[DAO] layer tests</span></h2>
 <p><a id="refheading1885301168461456"></a></p>
-<h3 id="221-the-visual-studio-project">2.2.1. <span style="color: #4f81bd"><strong>The Visual Studio project</strong></span></h3>
+<h3 id="221-the-visual-studio-project">2.2.1. <span style="color: #4f81bd">The Visual Studio project</span></h3>
 <p>The Visual Studio project has already been presented. As a reminder:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007220000023BDAB3C604.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.629cm;" class="odt-zoomable" data-zoom-src="images/10000000000007220000023BDAB3C604.png" /></td></tr></table>
 
@@ -1214,7 +1214,7 @@
 </ul>
 
 <p><a id="refheading1885321168461456"></a></p>
-<h3 id="222-the-console-test-program-maincs">2.2.2. <span style="color: #4f81bd"><strong>The console test program [Main.cs]</strong></span></h3>
+<h3 id="222-the-console-test-program-maincs">2.2.2. <span style="color: #4f81bd">The console test program [Main.cs]</span></h3>
 <p>The test program [Main.cs] runs in the following architecture:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006C700000150295F2606.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.485cm;" class="odt-zoomable" data-zoom-src="images/10000000000006C700000150295F2606.png" /></td></tr></table>
 
@@ -1287,7 +1287,7 @@
   </li>
 </ul>
 <p><a id="refheading1885341168461456"></a></p>
-<h3 id="223-unit-tests-with-nunit">2.2.3. <span style="color: #4f81bd"><strong>Unit tests with NUnit</strong></span></h3>
+<h3 id="223-unit-tests-with-nunit">2.2.3. <span style="color: #4f81bd">Unit tests with NUnit</span></h3>
 <p>We will now move on to a NUnit unit test. The Visual Studio project for the [dao] layer will evolve as follows:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007BD0000027A69148EF6.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.761cm;" class="odt-zoomable" data-zoom-src="images/10000000000007BD0000027A69148EF6.png" /></td></tr></table>
 
