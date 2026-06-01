@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://stahe.github.io/en-nhibernate-dotnet-dec-2011/conclusion.html">
       
       
-        <link rel="prev" href="springnhibernate-integration.html">
+        <link rel="prev" href="spring--nhibernate-integration.html">
       
       
       
@@ -54,6 +54,8 @@
     
     
       <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -301,14 +303,14 @@
   
   
     <li class="md-nav__item">
-      <a href="introduction-to-nhibernate-orm.html" class="md-nav__link">
+      <a href="introduction-to-orm-nhibernate.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1. Introduction to NHibernate ORM
+    1. Introduction to ORM NHibernate
   
 
     
@@ -328,14 +330,14 @@
   
   
     <li class="md-nav__item">
-      <a href="springnhibernate-integration.html" class="md-nav__link">
+      <a href="spring--nhibernate-integration.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    2. Spring/NHibernate Integration
+    2. Spring / NHibernate Integration
   
 
     
@@ -402,27 +404,27 @@
 
 
 
-<p><a id="refheading867052117501572"></a></p>
+<p><span id="refheading867052117501572" name="refheading867052117501572" class="odt-bookmark-anchor"></span></p>
 <h1 id="3-conclusion">3. <span style="color: #365f91">Conclusion</span></h1>
-<p>We have presented the key concepts of NHibernate. The sample code is available |HERE| in the form of two Visual Studio 2010 projects.</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000070B0000035CC6A3892B.png" width="680" height="324" style="display:inline-block; margin:4px;width:17.997cm;height:8.585cm;" class="odt-zoomable" data-zoom-src="images/100000000000070B0000035CC6A3892B.png" /></td></tr></table>
+<p>We have presented the key concepts of Nhibernate. The sample code is available |ICI| in the form of two Visual Studio 2010 projects.</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000070B0000035CC6A3892B.png" width="680" height="324" style="display:inline-block; margin:4px;width:17.997cm;height:8.585cm;" class="odt-zoomable" data-zoom-src="images/100000000000070B0000035CC6A3892B.png" /></td></tr></table>
 
-<p>The [pam-nhibernate-demos] project includes three configuration files [1]:</p>
+<p>The [pam-nhibernate-demos] project is accompanied by three configuration files:</p>
 <ul>
-  <li>one for the MySQL DBMS [App.config.MySQL]
+  <li>one for the SGBD MySQL [App.config.MySQL]
   </li>
-  <li>one for the SQL Server DBMS [App.config.SQLServer]
+  <li>one for SGBD, SQL, and Server [App.config.SQLServer]
   </li>
-  <li>one for the SQL Server Compact DBMS [App.config.SQLServerCe]
+  <li>one for the SGBD SQL Server Compact [App.config.SQLServerCe]
   </li>
 </ul>
 
 <p>To use them, simply replace [App.config] with the appropriate file.</p>
 <p>In [2], the complete folder accompanying this document:</p>
 <ul>
-  <li>the [databases] folder [3] contains 
+  <li>the folder [databases] [3] contains 
     <ul>
-      <li>an SQL script to generate the MySQL database
+      <li>a script SQL to generate the database MySQL
       </li>
       <li>a SQL Server 2005 database
       </li>
@@ -430,7 +432,7 @@
       </li>
     </ul>
   </li>
-  <li>the [libnet4] folder [4] contains the DLLs required for the Visual Studio project.
+  <li>the [libnet4] folder [4] contains the DLL files required for the Visual Studio project.
   </li>
   <li>The [pam-nhibernate-demos] and [pam-spring-nhibernate-dao] folders are those of the two Visual Studio 2010 projects discussed earlier.
   </li>
@@ -438,21 +440,21 @@
 
 <p>This document can be further explored through a case study:</p>
 <ul>
-  <li><b>Building a three-tier application with ASP.NET, C#, Spring.net, and Nhibernate </b>[<a href="https://stahe.github.io/en-pam-aspnet-juin-2010/"><u><span style="color: #0563c1">https://stahe.github.io/en-pam-aspnet-juin-2010/</span></u></a>]
+  <li><b>Building a three-tier application with ASP.NET, C#, Spring.net, and Nhibernate </b>[http://tahe.developpez.com/dotnet/pam-aspnet/]
   </li>
 </ul>
 
 <p>The application in this case study has the following three-tier structure:</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000076F0000015CFFB7ECD1.png" width="680" height="124" style="display:inline-block; margin:4px;width:17.997cm;height:3.291cm;" class="odt-zoomable" data-zoom-src="images/100000000000076F0000015CFFB7ECD1.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000076F0000015CFFB7ECD1.png" width="680" height="124" style="display:inline-block; margin:4px;width:17.997cm;height:3.291cm;" class="odt-zoomable" data-zoom-src="images/100000000000076F0000015CFFB7ECD1.png" /></td></tr></table>
 
 <ul>
-  <li>The [1-DAO] layer (DAO = Data Access Object) handles data access. The data is stored in a database. The [DAO] layer uses the NHibernate framework to access the data.
+  <li>The [1-dao] layer (dao=Data Access Object) handles data access. The data is stored in a database. The [dao] layer uses the Nhibernate framework to access the data.
   </li>
-  <li>The [2-business] layer handles the business logic of the application, specifically payroll calculations.
+  <li>The [2-métier] layer handles the business logic of the application, specifically payroll calculation.
   </li>
-  <li>The [3-presentation] layer handles the presentation of data to the user and the execution of user requests. This is a web/ASP.NET layer.
+  <li>The [3-présentation] layer handles the presentation of data to the user and the execution of user requests. It is a web layer / ASP.NET.
   </li>
-  <li>The three layers are made independent through the use of .NET interfaces
+  <li>The three layers are made independent through the use of interfaces .NET
   </li>
   <li>The integration of the different layers is handled by <b>Spring.NET</b>
   </li>
